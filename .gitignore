@@ -1,0 +1,26 @@
+# Ignore development documentation
+devdocs/
+
+# Ignore backup files
+*.bak.py
+
+# Ignore generated reports and visualizations
+reports/*
+!reports/
+reports/visualizations/*
+!reports/visualizations/
+
+# Ignore data files (track folders, not content)
+data/raw/*
+!data/raw/
+data/processed/parsed/*
+!data/processed/parsed/
+data/processed/cleaned/*
+!data/processed/cleaned/
+
+# Ignore virtual environments
+venv/
+
+# Ignore log files
+logs/*
+!logs/

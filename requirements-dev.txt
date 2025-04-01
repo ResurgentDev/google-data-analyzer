@@ -1,0 +1,5 @@
+black>=23.1.0           # Code auto-formatting
+flake8>=6.1.0           # Linting for Python
+pytest>=7.3.0           # Testing framework
+
+pip install -r requirements.txt
