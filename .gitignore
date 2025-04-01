@@ -6,21 +6,21 @@ devdocs/
 
 # Ignore generated reports and visualizations
 reports/*
-!reports/
+!reports/.gitkeep
 reports/visualizations/*
-!reports/visualizations/
+!reports/visualizations/.gitkeep
 
 # Ignore data files (track folders, not content)
 data/raw/*
-!data/raw/
+!data/raw/.gitkeep
 data/processed/parsed/*
-!data/processed/parsed/
+!data/processed/parsed/.gitkeep
 data/processed/cleaned/*
-!data/processed/cleaned/
+!data/processed/cleaned/.gitkeep
 
 # Ignore virtual environments
 venv/
 
 # Ignore log files
 logs/*
-!logs/
+!logs/.gitkeep
