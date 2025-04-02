@@ -34,6 +34,8 @@ import re
 from collections import Counter, defaultdict
 from email.header import decode_header
 import logging
+import matplotlib.pyplot
+
 
 # Import markdown report generation functionality
 try:
@@ -619,45 +621,6 @@ class MboxAnalyzer:
             logger.error(f"Error creating visualizations: {str(e)}")
             return []
         
-    def analyze(self):
-        """
-        Performs the complete analysis of the .mbox file.
-        
-        Returns:
-            bool: True if analysis was successful, False otherwise
-        """
-        if not self.open_mbox():
-            return False
-            
-        try:
-            logger.info("Starting email analysis...")
-            
-            # Process each message
-            for i, message in enumerate(self.mbox):
-                if i % 100 == 0 and i > 0:
-                    logger.info(f"Processed {i} emails...")
-                
-                # Analyze headers
-                self.analyze_headers(message, i)
-                
-                # Analyze content
-                self.analyze_content(message, i)
-                
-            logger.info(f"Finished processing {self.email_count} emails")
-            
-            # Calculate statistics
-            self.calculate_statistics()
-            
-            return True
-        
-        except Exception as e:
-            logger.error(f"Error during analysis: {str(e)}")
-            self.report["errors"].append({
-                "type": "analysis_error",
-                "message": str(e)
-            })
-            return False
-            
     def generate_report(self, output_path=None, visualize=False):
         """
         Generates a report of the analysis results.
@@ -677,12 +640,14 @@ class MboxAnalyzer:
         
         # Generate visualizations if requested
         if visualize:
-            viz_dir = os.path.splitext(output_path)[0] + "_visualizations" if output_path else "mbox_visualizations"
+            viz_dir = os.path.join("reports", "visualizations") if output_path else os.path.join("reports", "visualizations")
             visualization_files = self.create_visualizations(viz_dir)
             serializable_report["visualizations"] = visualization_files
-            
+
         # Output to file if path provided
         if output_path:
+            # Ensure output goes to reports directory
+            output_path = os.path.join("reports", os.path.basename(output_path))
             try:
                 with open(output_path, 'w', encoding='utf-8') as f:
                     json.dump(serializable_report, f, indent=2, ensure_ascii=False)
@@ -776,8 +741,8 @@ def main():
     # Generate markdown summary if requested
     if args.summary and args.output:
         try:
-            # Create markdown filename based on JSON output path
-            md_output_path = os.path.splitext(args.output)[0] + ".md"
+            # Create markdown filename based on JSON output path 
+            md_output_path = os.path.join("reports", os.path.splitext(os.path.basename(args.output))[0] + ".md")
             
             # Generate markdown content
             logger.info(f"Generating markdown summary to {md_output_path}")
