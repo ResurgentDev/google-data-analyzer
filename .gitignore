@@ -24,3 +24,6 @@ venv/
 # Ignore log files
 logs/*
 !logs/.gitkeep
+
+# Ignore archives and backups
+archives/
