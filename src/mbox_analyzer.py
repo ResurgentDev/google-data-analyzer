@@ -23,26 +23,27 @@ Example:
 """
 
 import mailbox
-import email
 import os
 import sys
 import json
 import argparse
 import datetime
-import mimetypes
-import re
-from collections import Counter, defaultdict
-from email.header import decode_header
 import logging
-import matplotlib.pyplot
+from collections import Counter, defaultdict
+
+# Import functionality from modular structure
+from email_utils import decode_header, extract_email_addresses, extract_subject_keywords
+from content_analyzer import analyze_content, format_size
+from visualizer import create_all_visualizations
+from report_utils import make_json_serializable, generate_report, update_report_with_visualizations
 
 
 # Import markdown report generation functionality
 try:
-    from mbox_report_to_md import process_report
+    from report_markdown import process_report
 except ImportError:
     def process_report(report_data):
-        logger.error("mbox_report_to_md.py module not found. Cannot generate markdown summary.")
+        logger.error("report_markdown.py module not found. Cannot generate markdown summary.")
         return None
 
 
@@ -130,80 +131,6 @@ class MboxAnalyzer:
             return False
     
     @staticmethod
-    def _decode_header_value(header_value):
-        """
-        Decodes email header values properly.
-        
-        Args:
-            header_value: The email header value to decode
-            
-        Returns:
-            str: Decoded header value
-        """
-        if not header_value:
-            return ""
-        
-        try:
-            decoded_parts = []
-            for part, encoding in decode_header(header_value):
-                if isinstance(part, bytes):
-                    if encoding:
-                        try:
-                            decoded_parts.append(part.decode(encoding))
-                        except (LookupError, UnicodeDecodeError):
-                            decoded_parts.append(part.decode('utf-8', errors='replace'))
-                    else:
-                        decoded_parts.append(part.decode('utf-8', errors='replace'))
-                else:
-                    decoded_parts.append(part)
-            return ' '.join(decoded_parts)
-        except Exception as e:
-            logger.warning(f"Error decoding header: {str(e)}")
-            return str(header_value)
-
-    @staticmethod
-    def _extract_email_addresses(header_value):
-        """
-        Extracts email addresses from a header value.
-        
-        Args:
-            header_value (str): The header value containing email addresses
-            
-        Returns:
-            list: List of extracted email addresses
-        """
-        if not header_value:
-            return []
-        
-        # Simple regex for email extraction
-        email_pattern = r'[\w\.-]+@[\w\.-]+'
-        return re.findall(email_pattern, header_value)
-    
-    @staticmethod
-    def _extract_subject_keywords(subject):
-        """
-        Extracts keywords from email subjects.
-        
-        Args:
-            subject (str): The email subject
-            
-        Returns:
-            list: List of keywords
-        """
-        if not subject:
-            return []
-        
-        # Remove common prefixes like Re:, Fwd:, etc.
-        cleaned_subject = re.sub(r'^(Re|Fwd|Fw|RE|FWD|FW):\s*', '', subject, flags=re.IGNORECASE)
-        
-        # Split into words and filter out common words and short words
-        words = re.findall(r'\b[a-zA-Z]{3,}\b', cleaned_subject)
-        common_words = {'the', 'and', 'for', 'with', 'this', 'that', 'from', 'your', 'have'}
-        keywords = [word.lower() for word in words if word.lower() not in common_words]
-        
-        return keywords
-    
-    @staticmethod
     def _format_size(size_bytes):
         """
         Formats a byte size into a human-readable string.
@@ -214,11 +141,7 @@ class MboxAnalyzer:
         Returns:
             str: Formatted size string
         """
-        for unit in ['B', 'KB', 'MB', 'GB', 'TB']:
-            if size_bytes < 1024.0:
-                return f"{size_bytes:.2f} {unit}"
-            size_bytes /= 1024.0
-        return f"{size_bytes:.2f} PB"
+        return format_size(size_bytes)
     
     def analyze_headers(self, message, msg_idx):
         """
@@ -236,44 +159,45 @@ class MboxAnalyzer:
         
         # Process From header
         if 'from' in message:
-            from_value = self._decode_header_value(message['from'])
-            from_addresses = self._extract_email_addresses(from_value)
+            from_value = decode_header(message['from'])
+            from_addresses = extract_email_addresses(from_value)
             for addr in from_addresses:
                 self.report["headers"]["from"][addr] += 1
         
         # Process To header
         if 'to' in message:
-            to_value = self._decode_header_value(message['to'])
-            to_addresses = self._extract_email_addresses(to_value)
+            to_value = decode_header(message['to'])
+            to_addresses = extract_email_addresses(to_value)
             for addr in to_addresses:
                 self.report["headers"]["to"][addr] += 1
         
         # Process CC header
         if 'cc' in message:
-            cc_value = self._decode_header_value(message['cc'])
-            cc_addresses = self._extract_email_addresses(cc_value)
+            cc_value = decode_header(message['cc'])
+            cc_addresses = extract_email_addresses(cc_value)
             for addr in cc_addresses:
                 self.report["headers"]["cc"][addr] += 1
         
         # Process BCC header
         if 'bcc' in message:
-            bcc_value = self._decode_header_value(message['bcc'])
-            bcc_addresses = self._extract_email_addresses(bcc_value)
+            bcc_value = decode_header(message['bcc'])
+            bcc_addresses = extract_email_addresses(bcc_value)
             for addr in bcc_addresses:
                 self.report["headers"]["bcc"][addr] += 1
         
         # Process Subject header
         if 'subject' in message:
-            subject = self._decode_header_value(message['subject'])
-            keywords = self._extract_subject_keywords(subject)
+            subject = decode_header(message['subject'])
+            keywords = extract_subject_keywords(subject)
             for keyword in keywords:
                 self.report["headers"]["subject_keywords"][keyword] += 1
         
         # Process Date header
         if 'date' in message:
             try:
-                date_str = self._decode_header_value(message['date'])
+                date_str = decode_header(message['date'])
                 # Try to parse the date
+                import email.utils
                 date_tuple = email.utils.parsedate_tz(date_str)
                 if date_tuple:
                     timestamp = email.utils.mktime_tz(date_tuple)
@@ -283,94 +207,24 @@ class MboxAnalyzer:
             except Exception as e:
                 logger.warning(f"Error parsing date '{date_str}' in message {msg_idx}: {str(e)}")
     
-    def analyze_content(self, message, msg_idx):
-        """
-        Analyzes body content and attachments of an email message.
-        
-        Args:
-            message (mailbox.Message): The email message to analyze
-            msg_idx (int): Index of the message in the mailbox
-        """
-        # Initialize counters for this message
-        plain_text_size = 0
-        html_size = 0
-        attachment_sizes = []
-        
-        try:
-            # Handle single part messages
-            if not message.is_multipart():
-                content_type = message.get_content_type()
-                content = message.get_payload(decode=True)
-                content_size = len(content) if content else 0
-                
-                if content_type == 'text/plain':
-                    plain_text_size += content_size
-                elif content_type == 'text/html':
-                    html_size += content_size
-                else:
-                    # Treat as attachment
-                    filename = self._get_filename_from_part(message)
-                    if filename:
-                        extension = os.path.splitext(filename)[1].lower()
-                        self.report["content"]["attachments"]["counts_by_type"][extension or 'unknown'] += 1
-                        self.report["content"]["attachments"]["sizes_by_type"][extension or 'unknown'].append(content_size)
-                        attachment_sizes.append(content_size)
-            
-            # Handle multipart messages
-            else:
-                for part in message.walk():
-                    if part.is_multipart():
-                        continue
-                    
-                    content_type = part.get_content_type()
-                    content = part.get_payload(decode=True)
-                    content_size = len(content) if content else 0
-                    
-                    # Check for main body parts
-                    if content_type == 'text/plain':
-                        plain_text_size += content_size
-                    elif content_type == 'text/html':
-                        html_size += content_size
-                    
-                    # Check for attachments
-                    filename = self._get_filename_from_part(part)
-                    disposition = part.get('Content-Disposition', '')
-                    
-                    if filename or 'attachment' in disposition:
-                        extension = os.path.splitext(filename)[1].lower() if filename else ''
-                        self.report["content"]["attachments"]["counts_by_type"][extension or 'unknown'] += 1
-                        self.report["content"]["attachments"]["sizes_by_type"][extension or 'unknown'].append(content_size)
-                        attachment_sizes.append(content_size)
-            
-            # Record body sizes for this message
-            if plain_text_size > 0:
-                self.report["content"]["body_sizes"]["plain_text"].append(plain_text_size)
-            
-            if html_size > 0:
-                self.report["content"]["body_sizes"]["html"].append(html_size)
-                
-        except Exception as e:
-            logger.warning(f"Error analyzing content in message {msg_idx}: {str(e)}")
-            self.report["errors"].append({
-                "type": "content_analysis_error",
-                "message": str(e),
-                "message_index": msg_idx
-            })
-    
     @staticmethod
     def _get_filename_from_part(part):
         """
         Extracts filename from a message part.
-        
+
         Args:
             part: Email message part
-            
+
         Returns:
             str: Filename or empty string
         """
-        filename = part.get_filename()
-        if filename:
-            filename = MboxAnalyzer._decode_header_value(filename)
+        filename = None
+        if part.get_filename():
+            filename = part.get_filename()
+        elif part.get_param('filename'):
+            filename = part.get_param('filename')
+        elif part.get_param('name'):
+            filename = part.get_param('name')
         return filename or ""
     
     def calculate_statistics(self):
@@ -509,9 +363,68 @@ class MboxAnalyzer:
             
         return total_size
     
+    def analyze(self):
+        """
+        Analyzes the mbox file by processing each message.
+        
+        This method:
+        - Processes each message in the mbox file
+        - Calls analyze_headers() and analyze_content() for each message
+        - Calculates statistics on the parsed data
+        
+        Returns:
+            bool: True if analysis was successful, False otherwise
+        """
+        try:
+            if not self.open_mbox():
+                return False
+                
+            logger.info(f"Beginning analysis of {self.email_count} emails")
+            
+            # Process each message
+            for msg_idx, message in enumerate(self.mbox):
+                try:
+                    # Log progress for large mailboxes
+                    if msg_idx % 100 == 0 and msg_idx > 0:
+                        logger.info(f"Processed {msg_idx} emails...")
+                    
+                    # Analyze headers for this message
+                    self.analyze_headers(message, msg_idx)
+                    
+                    # Analyze content for this message
+                    analyze_content(message, self.report, msg_idx)
+                    
+                except Exception as e:
+                    logger.warning(f"Error processing message {msg_idx}: {str(e)}")
+                    self.report["errors"].append({
+                        "type": "message_processing_error",
+                        "message": str(e),
+                        "message_index": msg_idx
+                    })
+            
+            # Calculate statistics
+            self.calculate_statistics()
+            
+            # Calculate content size comparison
+            parsed_data_size = self._calculate_parsed_data_size()
+            self.report["size_comparison"]["parsed_data_size"] = parsed_data_size
+            self.report["size_comparison"]["parsed_data_size_human"] = format_size(parsed_data_size)
+            self.report["size_comparison"]["parsed_to_file_ratio"] = parsed_data_size / self.file_size if self.file_size else 0
+            
+            logger.info("Analysis completed successfully")
+            return True
+            
+        except Exception as e:
+            logger.error(f"Error during analysis: {str(e)}")
+            self.report["errors"].append({
+                "type": "analysis_error",
+                "message": str(e)
+            })
+            return False
+    
     def create_visualizations(self, output_dir):
         """
-        Creates visualizations of the email data.
+        Creates visualizations based on the analysis data.
         
         Args:
             output_dir (str): Directory where visualization files will be saved
@@ -519,101 +432,13 @@ class MboxAnalyzer:
         Returns:
             list: Paths to the generated visualization files
         """
-        # Check for matplotlib availability
         try:
-            import matplotlib.pyplot as plt
-            import matplotlib
-            matplotlib.use('Agg')  # Non-interactive backend
-        except ImportError:
-            logger.warning("Matplotlib is not available. Skipping visualizations.")
-            return []
-            
-        visualization_files = []
-        
-        try:
+            # Ensure the output directory exists
             os.makedirs(output_dir, exist_ok=True)
             
-            # 1. Top senders visualization
-            if len(self.report["headers"]["from"]) > 0:
-                top_senders = self.report["headers"]["from"].most_common(10)
-                if top_senders:
-                    plt.figure(figsize=(12, 6))
-                    senders, counts = zip(*top_senders)
-                    plt.bar(senders, counts, color='skyblue')
-                    plt.xticks(rotation=45, ha='right')
-                    plt.title('Top 10 Email Senders')
-                    plt.tight_layout()
-                    sender_viz_path = os.path.join(output_dir, 'top_senders.png')
-                    plt.savefig(sender_viz_path)
-                    plt.close()
-                    visualization_files.append(sender_viz_path)
-                    
-            # 2. Email distribution by month
-            date_dist = self.report["headers"]["date_distribution"]
-            if date_dist:
-                sorted_dates = sorted(date_dist.items())
-                if sorted_dates:
-                    plt.figure(figsize=(12, 6))
-                    dates, counts = zip(*sorted_dates)
-                    plt.plot(dates, counts, marker='o', linestyle='-', color='green')
-                    plt.xticks(rotation=45, ha='right')
-                    plt.title('Email Count by Month')
-                    plt.tight_layout()
-                    date_viz_path = os.path.join(output_dir, 'email_by_month.png')
-                    plt.savefig(date_viz_path)
-                    plt.close()
-                    visualization_files.append(date_viz_path)
-                    
-            # 3. Attachment types pie chart
-            attachment_counts = self.report["content"]["attachments"]["counts_by_type"]
-            if attachment_counts:
-                top_types = attachment_counts.most_common(8)  # Top 8 types + others
-                if top_types:
-                    labels = [t[0] for t in top_types]
-                    sizes = [t[1] for t in top_types]
-                    
-                    # Add "Others" category if there are more types
-                    if len(attachment_counts) > 8:
-                        others_count = sum(c for t, c in attachment_counts.items() if t not in labels)
-                        labels.append('Others')
-                        sizes.append(others_count)
-                        
-                    plt.figure(figsize=(10, 8))
-                    plt.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=140)
-                    plt.axis('equal')
-                    plt.title('Attachment Types Distribution')
-                    plt.tight_layout()
-                    attachment_viz_path = os.path.join(output_dir, 'attachment_types.png')
-                    plt.savefig(attachment_viz_path)
-                    plt.close()
-                    visualization_files.append(attachment_viz_path)
-                    
-            # 4. Body size comparison (HTML vs Plain Text)
-            plain_sizes = self.report["content"]["body_sizes"]["plain_text"]
-            html_sizes = self.report["content"]["body_sizes"]["html"]
+            # Call the modular visualization function
+            visualization_files = create_all_visualizations(self.report, output_dir)
             
-            if plain_sizes or html_sizes:
-                plt.figure(figsize=(10, 6))
-                
-                # Calculate total and average sizes
-                plain_total = sum(plain_sizes) if plain_sizes else 0
-                html_total = sum(html_sizes) if html_sizes else 0
-                plain_avg = plain_total / len(plain_sizes) if plain_sizes else 0
-                html_avg = html_total / len(html_sizes) if html_sizes else 0
-                
-                # Plot bar chart
-                plt.bar(['Plain Text', 'HTML'], [plain_total, html_total], alpha=0.7, label='Total Size')
-                plt.bar(['Plain Text Avg', 'HTML Avg'], [plain_avg, html_avg], alpha=0.7, label='Average Size')
-                
-                plt.title('Body Size Comparison: Plain Text vs HTML')
-                plt.ylabel('Size in bytes')
-                plt.legend()
-                plt.tight_layout()
-                body_viz_path = os.path.join(output_dir, 'body_size_comparison.png')
-                plt.savefig(body_viz_path)
-                plt.close()
-                visualization_files.append(body_viz_path)
-                
             logger.info(f"Created {len(visualization_files)} visualizations in {output_dir}")
             return visualization_files
             
@@ -636,57 +461,28 @@ class MboxAnalyzer:
         self.report["generated_at"] = datetime.datetime.now().isoformat()
         
         # Convert Counter objects to regular dictionaries for JSON serialization
-        serializable_report = self._make_json_serializable(self.report)
+        serializable_report = make_json_serializable(self.report)
         
         # Generate visualizations if requested
+        # Generate visualizations if requested
         if visualize:
-            viz_dir = os.path.join("reports", "visualizations") if output_path else os.path.join("reports", "visualizations")
+            viz_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "reports", "visualizations")
             visualization_files = self.create_visualizations(viz_dir)
-            serializable_report["visualizations"] = visualization_files
-
+            update_report_with_visualizations(self.report, visualization_files)
         # Output to file if path provided
         if output_path:
-            # Ensure output goes to reports directory
-            output_path = os.path.join("reports", os.path.basename(output_path))
+            # Ensure output goes to reports directory in project root
+            report_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "reports")
+            os.makedirs(report_dir, exist_ok=True)
+            full_output_path = os.path.join(report_dir, os.path.basename(output_path))
             try:
-                with open(output_path, 'w', encoding='utf-8') as f:
+                with open(full_output_path, 'w', encoding='utf-8') as f:
                     json.dump(serializable_report, f, indent=2, ensure_ascii=False)
-                logger.info(f"Report saved to {output_path}")
+                logger.info(f"Report saved to {full_output_path}")
             except Exception as e:
-                logger.error(f"Error saving report to {output_path}: {str(e)}")
+                logger.error(f"Error saving report to {full_output_path}: {str(e)}")
                 
         return serializable_report
-        
-    def _make_json_serializable(self, obj):
-        """
-        Converts the report to a JSON-serializable format.
-        
-        Args:
-            obj: The object to convert
-            
-        Returns:
-            object: JSON-serializable version of the object
-        """
-        if isinstance(obj, dict):
-            # Convert defaultdict to regular dict
-            if isinstance(obj, defaultdict):
-                obj = dict(obj)
-                
-            # Process each key-value pair
-            return {k: self._make_json_serializable(v) for k, v in obj.items()}
-            
-        elif isinstance(obj, list):
-            return [self._make_json_serializable(item) for item in obj]
-            
-        elif isinstance(obj, Counter):
-            return dict(obj)
-            
-        elif isinstance(obj, datetime.datetime):
-            return obj.isoformat()
-            
-        else:
-            return obj
-
 
 def main():
     """Main entry point for the script."""
@@ -741,8 +537,10 @@ def main():
     # Generate markdown summary if requested
     if args.summary and args.output:
         try:
-            # Create markdown filename based on JSON output path 
-            md_output_path = os.path.join("reports", os.path.splitext(os.path.basename(args.output))[0] + ".md")
+            # Create markdown filename in project root reports directory
+            report_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "reports")
+            md_output_path = os.path.join(report_dir, 
+                os.path.splitext(os.path.basename(args.output))[0] + ".md")
             
             # Generate markdown content
             logger.info(f"Generating markdown summary to {md_output_path}")
