@@ -46,7 +46,11 @@ def calculate_median(data: List[float]) -> float:
     """
     if not data:
         return 0
-    return py_stats.median(data)
+    sorted_data = sorted(data)
+    n = len(sorted_data)
+    if n % 2 == 0:
+        return (sorted_data[n//2 - 1] + sorted_data[n//2]) / 2
+    return float(sorted_data[n//2])
 
 
 def calculate_mode(data: List[Any]) -> Any:
