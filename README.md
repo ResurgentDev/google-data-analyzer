@@ -28,6 +28,13 @@ Google Takeout allows users to download data from various services, including Gm
 
 ---
 
+## Latest Changes (v0.2.0)
+The project has undergone significant improvements in version 0.2.0:
+- Complete code reorganization for better maintainability
+- Added comprehensive test suite with pytest
+- Enhanced code modularity and organization
+
+---
 ## Current Features
 
 - **Email Parsing (MBOX Format):**
