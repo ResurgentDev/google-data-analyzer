@@ -7,39 +7,25 @@ assignees: ''
 ---
 
 ## Description
-Current tests in test_statistics.py have been temporarily adjusted to accommodate the existing implementation in statistics.py. While this ensures tests pass, they lack the strict validation needed for robust coverage.
+The tests in `test_statistics.py` have been rewritten and improved significantly, but some areas could still benefit from greater robustness to ensure future-proofing.
 
 ## Current State
-- Tests marked with @pytest.mark.tempfix
-- Using approximate comparisons for floating-point values
-- Relaxed assertions for median calculations
-- Flexible string matching for size formatting
+- Improved tests now cover core functionality comprehensively.
+- However, certain aspects like edge cases and error handling still require revisiting.
+- Some tests rely on approximate floating-point comparisons which could be further refined.
 
 ## Steps to Resolve
-1. Revisit test design to enforce stricter checks:
-   - Replace approximate comparisons with exact value checks
-   - Implement precise median calculation validation
-   - Standardize size formatting expectations
-   
-2. Adjust statistics.py as necessary:
-   - Implement proper median calculation
-   - Standardize size formatting
-   - Add input validation
-   
-3. Ensure cross-compatibility:
-   - Verify no functionality breaks in dependent modules
-   - Update documentation to reflect changes
-   - Add regression tests
+1. Evaluate remaining gaps in test coverage (e.g., edge cases, additional error handling).
+2. Explore replacing approximate comparisons (`pytest.approx`) with precise checks where feasible.
+3. Validate whether additional statistical functions require new test cases.
 
 ## Acceptance Criteria
-- [ ] All @pytest.mark.tempfix markers removed
-- [ ] Tests use exact value comparisons where appropriate
-- [ ] Consistent size formatting across all functions
-- [ ] Full test coverage maintained
-- [ ] No regression in core functionality
+- [ ] Comprehensive edge case coverage for all statistical functions.
+- [ ] Precise floating-point validation implemented (if appropriate).
+- [ ] Tests remain clean and efficient.
 
 ## Priority
-Medium
+Low
 
 ## Additional Notes
-Current implementation uses statistical approximations that, while functional, could be more precise. This improvement will enhance the reliability and maintainability of the test suite.
+With `test_statistics.py` now functional and comprehensive, further improvements should focus on fine-tuning and long-term reliability enhancements.
