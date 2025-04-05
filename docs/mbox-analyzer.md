@@ -62,3 +62,73 @@ The script requires Python 3 and uses the following standard libraries:
 
 ## Output Format
 The report will be generated in JSON format, either written to the specified output file or printed to stdout if no output file is specified.
+
+## Test Data Generation
+
+The project includes a test data generator that creates .mbox files with various email formats, headers, content types, and attachments for testing purposes.
+
+### Usage
+
+From the project root:
+
+```bash
+python ./tests/data/generate_test_mbox.py --count [16|32] [--output OUTPUT_PATH]
+```
+
+If no output path is specified, the file will be created as `./tests/data/sample{count}.mbox`.
+
+### Features
+
+The test data generator produces emails with:
+
+1. **Header Variations**
+   - From/To with display names
+   - CC and BCC fields
+   - Various date formats
+   - Message-ID variations
+   - Reply-To headers
+   - Auto-reply headers
+   - Encoded headers with non-ASCII characters
+
+2. **Content Type Variations**
+   - Plain text emails
+   - HTML-only emails
+   - Mixed content (text/html) emails
+
+3. **Charset Variations**
+   - UTF-8 encoding
+   - ASCII encoding
+   - ISO-8859-1 encoding
+
+4. **Attachment Variations**
+   - Text file attachments
+   - PDF file attachments (simulated)
+   - Image file attachments (simulated)
+   - Multiple attachments in a single email
+
+### Examples
+
+Generate a standard test file with 16 emails:
+```bash
+python ./tests/data/generate_test_mbox.py
+```
+
+Generate a larger test file with 32 emails:
+```bash
+python ./tests/data/generate_test_mbox.py --count 32
+```
+
+Generate a test file in a custom location:
+```bash
+python ./tests/data/generate_test_mbox.py --output ./custom/path/test.mbox
+```
+
+### Integration with Testing
+
+The generated test files can be used with the analyzer:
+
+```bash
+python ./src/mbox_analyzer.py ./tests/data/sample16.mbox
+```
+
+This enables comprehensive testing of all analyzer features against a variety of email formats and edge cases.
