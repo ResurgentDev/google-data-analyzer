@@ -1,0 +1,496 @@
+From MAILER-DAEMON Sat Apr  5 01:53:31 2025
+Content-Type: multipart/mixed; boundary="===============0274830864303712499=="
+MIME-Version: 1.0
+From: Test User <test@domain.io>
+To: Contact <contact@company.co>
+Subject: Email with text attachment 1
+Date: Wed, 24 Mar 2021 03:43:47 +1100
+Message-ID: <174381801159.6616.7783083932390163561@domain.io>
+
+--===============0274830864303712499==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+This is a simple test email with plain text content. Email ID: 1
+--===============0274830864303712499==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="data.txt"
+
+Sample data for testing attachments.
+Line 1
+Line 2
+Line 3
+Email ID: 1
+--===============0274830864303712499==--
+
+From MAILER-DAEMON Sat Apr  5 01:53:31 2025
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="iso-8859-1"
+From: John Doe <john.doe@example.com>
+To: Contact <contact@company.co>
+Subject: =?utf-8?b?0KHQv9C10YbQuNCw0LvRjNC90L7QtSDRg9Cy0LXQtNC+0LzQu9C10L3QuNC1IDI=?=
+Date: Sat, 15 Apr 2023 18:17:51 +1000
+Message-ID: <174381801159.6616.14864741614097609483@example.com>
+CC: Project Owner <project@mail.net>
+
+Dear recipient,
+
+This email is automatically generated for testing purposes.
+Please ignore this message.
+
+Best regards,
+Test System
+Email ID: 2
+
+From MAILER-DAEMON Sat Apr  5 01:53:31 2025
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+From: Jane Smith <jane@test.org>
+To: Sales Team <sales@company.co>
+Subject: =?utf-8?b?0KLQtdGB0YLQvtCy0L7QtSDQv9C40YHRjNC80L4gMw==?=
+Date: 2022-06-20 08:51:02
+Message-ID: <174381801159.6616.2302636251494628997@test.org>
+BCC: Records <records@test.org>
+Auto-Submitted: auto-replied
+
+NOTICE: This is a test email.
+All content in this message is fictional and generated for testing.
+Please do not reply to this message.
+Email ID: 3
+
+From MAILER-DAEMON Sat Apr  5 01:53:31 2025
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+From: Maria Rodriguez <maria@company.co>
+To: Info <info@test.org>
+Subject: Password Reset 4
+Date: 2022-08-21 11:10:23
+Message-ID: <174381801159.6616.12362549907685523630@company.co>
+BCC: Archive <archive@example.com>
+Reply-To: Maria Rodriguez <maria@company.co>
+Auto-Submitted: auto-replied
+
+NOTICE: This is a test email.
+All content in this message is fictional and generated for testing.
+Please do not reply to this message.
+Email ID: 4
+
+From MAILER-DAEMON Sat Apr  5 01:53:31 2025
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Type: text/html; charset="iso-8859-1"
+From: =?utf-8?b?SsO2cmcgTcO8bGxlcg==?= <joerg@german-company.de>
+To: Support Team <support@example.com>
+Subject: Weekly Report 5
+Date: 2020-06-13 08:04:13
+Message-ID: <174381801159.6616.12090709337202143599@german-company.de>
+Content-Type: text/html; charset=iso-8859-1
+
+<html>
+<head><title>Automated Test Message</title></head>
+<body>
+<h1>Test Notification</h1>
+<p>Dear recipient,</p>
+<p>This email is automatically generated for testing purposes.</p>
+<p>Please ignore this message.</p>
+<p>Email ID: 5</p>
+<hr>
+<p><small>Test System</small></p>
+</body>
+</html>
+
+From MAILER-DAEMON Sat Apr  5 01:53:31 2025
+Content-Type: multipart/mixed; boundary="===============3338827910277438615=="
+MIME-Version: 1.0
+From: Alex Johnson <alex@mail.net>
+To: Admin <admin@domain.io>
+Subject: Email with image attachment 6
+Date: 2021-04-24 17:34:16
+Message-ID: <174381801159.6616.10764282542738094197@mail.net>
+
+--===============3338827910277438615==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+This is an example of a plaintext email for testing the Google Data Analyzer.
+The system should correctly extract and categorize this message.
+
+Some key features to test:
+- Header processing
+- Content extraction
+- Charset handling
+- Line breaks and formatting
+
+Email ID: 6
+
+--===============3338827910277438615==
+Content-Type: image/png
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="image_6.png"
+
+iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+bWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0
+NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNl
+SUQ9InhtcC5paWQ6MjY1OTU0QjYyQzM0MTFFQTlBRjE5NkY5RjgwNUJCOTgiIHhtcE1NOkRvY3Vt
+ZW50SUQ9InhtcC5kaWQ6MjY1OTU0QjcyQzM0MTFFQTlBRjE5NkY5RjgwNUJCOTgiPiA8eG1wTU06
+RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDoyNjU5NTRCNDJDMTFFQQ==
+
+--===============3338827910277438615==--
+
+From MAILER-DAEMON Sat Apr  5 01:53:31 2025
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="iso-8859-1"
+From: Ivan Petrov <ivan@russian-company.ru>
+To: Info <info@test.org>
+Subject: Important: Test Message 7
+Date: 2020-03-21 05:50:43
+Message-ID: <174381801159.6616.1171879355373994804@russian-company.ru>
+
+Dear recipient,
+
+This email is automatically generated for testing purposes.
+Please ignore this message.
+
+Best regards,
+Test System
+Email ID: 7
+
+From MAILER-DAEMON Sat Apr  5 01:53:31 2025
+Content-Type: multipart/mixed; boundary="===============1647772770547790958=="
+MIME-Version: 1.0
+From: Test User <test@domain.io>
+To: Development Team <dev@example.com>
+Subject: Email with text attachment 8
+Date: 2020-05-14 05:29:00
+Message-ID: <174381801159.6616.9234183946886817931@domain.io>
+
+--===============1647772770547790958==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+This is a simple test email with plain text content. Email ID: 8
+--===============1647772770547790958==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="data.txt"
+
+Sample data for testing attachments.
+Line 1
+Line 2
+Line 3
+Email ID: 8
+--===============1647772770547790958==--
+
+From MAILER-DAEMON Sat Apr  5 01:53:31 2025
+Content-Type: multipart/alternative; boundary="===============5232944112327802040=="
+MIME-Version: 1.0
+From: Maria Rodriguez <maria@company.co>
+To: Helpdesk <help@mail.net>
+Subject: Security Alert 9
+Date: 2021-09-25 16:58:00
+Message-ID: <174381801159.6616.359282477494518661@company.co>
+CC: Team Lead <manager@example.com>
+
+--===============5232944112327802040==
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="iso-8859-1"
+
+This is a simple test email with plain text content. Email ID: 9
+--===============5232944112327802040==
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Type: text/html; charset="iso-8859-1"
+
+<html>
+<head><title>Test Email with Formatting</title></head>
+<body>
+<h1>Test Email with Formatting</h1>
+<p>This email contains various HTML elements to test the parser:</p>
+<ul>
+  <li>Bold text: <b>This is bold</b></li>
+  <li>Italic text: <i>This is italic</i></li>
+  <li>Links: <a href="http://example.com">Example Website</a></li>
+  <li>Email ID: 9</li>
+</ul>
+<div style="background-color: #f0f0f0; padding: 10px; border: 1px solid #ccc;">
+  <p>This is a styled div element.</p>
+</div>
+</body>
+</html>
+--===============5232944112327802040==--
+
+From MAILER-DAEMON Sat Apr  5 01:53:31 2025
+Content-Type: multipart/mixed; boundary="===============3902758646140484902=="
+MIME-Version: 1.0
+From: Ivan Petrov <ivan@russian-company.ru>
+To: Info <info@test.org>
+Subject: Email with multiple attachments 10
+Date: 2021-03-22 15:35:10
+Message-ID: <174381801159.6616.16093549060913733891@russian-company.ru>
+
+--===============3902758646140484902==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+This is a simple test email with plain text content. Email ID: 10
+--===============3902758646140484902==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="data.txt"
+
+Sample data for testing attachments.
+Line 1
+Line 2
+Line 3
+Email ID: 10
+--===============3902758646140484902==
+Content-Type: application/pdf
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="document_10.pdf"
+
+CiVQREYtMS40CjEgMCBvYmoKPDwgL1R5cGUgL0NhdGFsb2cgL1BhZ2VzIDIgMCBSID4+CmVuZG9i
+agoyIDAgb2JqCjw8IC9UeXBlIC9QYWdlcyAvS2lkcyBbMyAwIFJdIC9Db3VudCAxID4+CmVuZG9i
+agozIDAgb2JqCjw8IC9UeXBlIC9QYWdlIC9QYXJlbnQgMiAwIFIgL01lZGlhQm94IFswIDAgNjEy
+IDc5Ml0gL0NvbnRlbnRzIDQgMCBSID4+CmVuZG9iago0IDAgb2JqCjw8IC9MZW5ndGggNjggPj4K
+c3RyZWFtCkJUCi9GMSAxMiBUZgoxMDAgNzAwIFRkCihUZXN0IFBERiBhdHRhY2htZW50IGZvciBl
+bWFpbCAxMCkgVGoKRVQKZW5kc3RyZWFtCmVuZG9iagp4cmVmCjAgNQowMDAwMDAwMDAwIDY1NTM1
+IGYKMDAwMDAwMDAxMCAwMDAwMCBuCjAwMDAwMDAwNjAgMDAwMDAgbgowMDAwMDAwMTE5IDAwMDAw
+IG4KMDAwMDAwMDIwOCAwMDAwMCBuCnRyYWlsZXIKPDwgL1NpemUgNSAvUm9vdCAxIDAgUiA+Pgpz
+dGFydHhyZWYKMzI3CiUlRU9GCg==
+
+--===============3902758646140484902==
+Content-Type: image/png
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="image_10.png"
+
+iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+bWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0
+NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNl
+SUQ9InhtcC5paWQ6MjY1OTU0QjYyQzM0MTFFQTlBRjE5NkY5RjgwNUJCOTgiIHhtcE1NOkRvY3Vt
+ZW50SUQ9InhtcC5kaWQ6MjY1OTU0QjcyQzM0MTFFQTlBRjE5NkY5RjgwNUJCOTgiPiA8eG1wTU06
+RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDoyNjU5NTRCNDJDMTFFQQ==
+
+--===============3902758646140484902==--
+
+From MAILER-DAEMON Sat Apr  5 01:53:31 2025
+Content-Type: multipart/mixed; boundary="===============0590534699672519631=="
+MIME-Version: 1.0
+From: Maria Rodriguez <maria@company.co>
+To: Admin <admin@domain.io>
+Subject: Email with multiple attachments 11
+Date: 2023-11-21 11:28:57
+Message-ID: <174381801160.6616.4573051503924355479@company.co>
+
+--===============0590534699672519631==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+AUTOMATED MESSAGE - DO NOT REPLY
+
+This message was generated by an automated system for testing purposes.
+If you received this message in error, please disregard it.
+
+Email ID: 11
+
+--===============0590534699672519631==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="data.txt"
+
+Sample data for testing attachments.
+Line 1
+Line 2
+Line 3
+Email ID: 11
+--===============0590534699672519631==
+Content-Type: application/pdf
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="document_11.pdf"
+
+CiVQREYtMS40CjEgMCBvYmoKPDwgL1R5cGUgL0NhdGFsb2cgL1BhZ2VzIDIgMCBSID4+CmVuZG9i
+agoyIDAgb2JqCjw8IC9UeXBlIC9QYWdlcyAvS2lkcyBbMyAwIFJdIC9Db3VudCAxID4+CmVuZG9i
+agozIDAgb2JqCjw8IC9UeXBlIC9QYWdlIC9QYXJlbnQgMiAwIFIgL01lZGlhQm94IFswIDAgNjEy
+IDc5Ml0gL0NvbnRlbnRzIDQgMCBSID4+CmVuZG9iago0IDAgb2JqCjw8IC9MZW5ndGggNjggPj4K
+c3RyZWFtCkJUCi9GMSAxMiBUZgoxMDAgNzAwIFRkCihUZXN0IFBERiBhdHRhY2htZW50IGZvciBl
+bWFpbCAxMSkgVGoKRVQKZW5kc3RyZWFtCmVuZG9iagp4cmVmCjAgNQowMDAwMDAwMDAwIDY1NTM1
+IGYKMDAwMDAwMDAxMCAwMDAwMCBuCjAwMDAwMDAwNjAgMDAwMDAgbgowMDAwMDAwMTE5IDAwMDAw
+IG4KMDAwMDAwMDIwOCAwMDAwMCBuCnRyYWlsZXIKPDwgL1NpemUgNSAvUm9vdCAxIDAgUiA+Pgpz
+dGFydHhyZWYKMzI3CiUlRU9GCg==
+
+--===============0590534699672519631==
+Content-Type: image/png
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="image_11.png"
+
+iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+bWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0
+NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNl
+SUQ9InhtcC5paWQ6MjY1OTU0QjYyQzM0MTFFQTlBRjE5NkY5RjgwNUJCOTgiIHhtcE1NOkRvY3Vt
+ZW50SUQ9InhtcC5kaWQ6MjY1OTU0QjcyQzM0MTFFQTlBRjE5NkY5RjgwNUJCOTgiPiA8eG1wTU06
+RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDoyNjU5NTRCNDJDMTFFQQ==
+
+--===============0590534699672519631==--
+
+From MAILER-DAEMON Sat Apr  5 01:53:31 2025
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Type: text/html; charset="iso-8859-1"
+From: Maria Rodriguez <maria@company.co>
+To: Support Team <support@example.com>
+Subject: Notification: System Update 12
+Date: Fri, 03 Apr 2020 01:55:21 +1100
+Message-ID: <174381801160.6616.4390410598330907728@company.co>
+Content-Type: text/html; charset=iso-8859-1
+
+<html>
+<head><title>Automated Test Message</title></head>
+<body>
+<h1>Test Notification</h1>
+<p>Dear recipient,</p>
+<p>This email is automatically generated for testing purposes.</p>
+<p>Please ignore this message.</p>
+<p>Email ID: 12</p>
+<hr>
+<p><small>Test System</small></p>
+</body>
+</html>
+
+From MAILER-DAEMON Sat Apr  5 01:53:31 2025
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="iso-8859-1"
+From: Ivan Petrov <ivan@russian-company.ru>
+To: Contact <contact@company.co>
+Subject: =?utf-8?b?54m55Yil44Gq44GK55+l44KJ44GbIDEz?=
+Date: 2023-04-04 03:42:27
+Message-ID: <174381801160.6616.7583498532299974161@russian-company.ru>
+BCC: Archive <archive@example.com>
+Reply-To: Ivan Petrov <ivan@russian-company.ru>
+
+Dear recipient,
+
+This email is automatically generated for testing purposes.
+Please ignore this message.
+
+Best regards,
+Test System
+Email ID: 13
+
+From MAILER-DAEMON Sat Apr  5 01:53:31 2025
+Content-Type: multipart/mixed; boundary="===============8515622169657364415=="
+MIME-Version: 1.0
+From: Maria Rodriguez <maria@company.co>
+To: Contact <contact@company.co>
+Subject: Email with PDF attachment 14
+Date: 2021-09-15 04:27:11
+Message-ID: <174381801160.6616.4608115626986097429@company.co>
+
+--===============8515622169657364415==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+This is a simple test email with plain text content. Email ID: 14
+--===============8515622169657364415==
+Content-Type: application/pdf
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="document_14.pdf"
+
+CiVQREYtMS40CjEgMCBvYmoKPDwgL1R5cGUgL0NhdGFsb2cgL1BhZ2VzIDIgMCBSID4+CmVuZG9i
+agoyIDAgb2JqCjw8IC9UeXBlIC9QYWdlcyAvS2lkcyBbMyAwIFJdIC9Db3VudCAxID4+CmVuZG9i
+agozIDAgb2JqCjw8IC9UeXBlIC9QYWdlIC9QYXJlbnQgMiAwIFIgL01lZGlhQm94IFswIDAgNjEy
+IDc5Ml0gL0NvbnRlbnRzIDQgMCBSID4+CmVuZG9iago0IDAgb2JqCjw8IC9MZW5ndGggNjggPj4K
+c3RyZWFtCkJUCi9GMSAxMiBUZgoxMDAgNzAwIFRkCihUZXN0IFBERiBhdHRhY2htZW50IGZvciBl
+bWFpbCAxNCkgVGoKRVQKZW5kc3RyZWFtCmVuZG9iagp4cmVmCjAgNQowMDAwMDAwMDAwIDY1NTM1
+IGYKMDAwMDAwMDAxMCAwMDAwMCBuCjAwMDAwMDAwNjAgMDAwMDAgbgowMDAwMDAwMTE5IDAwMDAw
+IG4KMDAwMDAwMDIwOCAwMDAwMCBuCnRyYWlsZXIKPDwgL1NpemUgNSAvUm9vdCAxIDAgUiA+Pgpz
+dGFydHhyZWYKMzI3CiUlRU9GCg==
+
+--===============8515622169657364415==--
+
+From MAILER-DAEMON Sat Apr  5 01:53:31 2025
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+From: John Doe <john.doe@example.com>
+To: Support Team <support@example.com>
+Subject: Notification: System Update 15
+Date: 2021-03-14 15:30:13
+Message-ID: <174381801160.6616.1081632266914266868@example.com>
+CC: Team Lead <lead@test.org>
+BCC: Records <records@test.org>
+
+AUTOMATED MESSAGE - DO NOT REPLY
+
+This message was generated by an automated system for testing purposes.
+If you received this message in error, please disregard it.
+
+Email ID: 15
+
+From MAILER-DAEMON Sat Apr  5 01:53:31 2025
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+From: Test User <test@domain.io>
+To: Contact <contact@company.co>
+Subject: Important: Test Message 16
+Date: 2020-12-11 01:03:37
+Message-ID: <174381801160.6616.16959699022148980068@domain.io>
+CC: Manager <manager@example.com>
+BCC: Archive <archive@example.com>
+Reply-To: Test User <test@domain.io>
+Auto-Submitted: auto-replied
+
+Dear recipient,
+
+This email is automatically generated for testing purposes.
+Please ignore this message.
+
+Best regards,
+Test System
+Email ID: 16
+
