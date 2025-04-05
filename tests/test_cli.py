@@ -4,6 +4,8 @@ Tests for CLI module functionality.
 
 This module contains unit tests for the command-line interface functionality,
 including argument parsing, file validation, and path handling.
+
+IMPORTANT: Use pytest-mock for all mocking needs, NOT unittest.mock!
 """
 
 import os
@@ -17,7 +19,7 @@ from typing import Tuple
 # Add the src directory to the path so we can import the modules
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 
-from cli import parse_arguments, validate_input_file, get_output_path
+from src.cli import parse_arguments, validate_input_file, get_output_path
 
 
 @pytest.fixture
@@ -55,7 +57,7 @@ class TestArgumentParsing:
     
     def test_file_argument(self):
         """Test parsing with a file argument."""
-        test_file = "test.mbox"
+        test_file = "tests/data/sample.mbox"
         with mock.patch('sys.argv', ['script_name', test_file]):
             args = parse_arguments()
             assert hasattr(args, 'file')

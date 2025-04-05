@@ -1,3 +1,6 @@
+"""
+IMPORTANT: Use pytest-mock for all mocking needs, NOT unittest.mock!
+"""
 import unittest
 import email
 from email.header import Header

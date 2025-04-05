@@ -1,5 +1,8 @@
 """
 Tests for the report_markdown module which handles conversion of report data to markdown format.
+
+IMPORTANT: Use pytest-mock for all mocking needs, NOT unittest.mock!
+
 """
 
 import os

@@ -8,6 +8,9 @@ These tests verify the functionality of the visualizer.py module, including:
 - Pie chart creation
 - Chart formatting and styling
 - Error handling
+
+IMPORTANT: Use pytest-mock for all mocking needs, NOT unittest.mock!
+
 """
 
 import os

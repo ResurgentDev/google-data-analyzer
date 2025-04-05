@@ -10,6 +10,8 @@ These tests cover the functionality of the content_analyzer module, including:
 - Size calculations
 - Content type detection
 - Character set handling
+
+IMPORTANT: Use pytest-mock for all mocking needs, NOT unittest.mock!
 """
 
 import os

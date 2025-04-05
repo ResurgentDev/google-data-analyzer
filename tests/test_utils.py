@@ -1,3 +1,6 @@
+"""
+IMPORTANT: Use pytest-mock for all mocking needs, NOT unittest.mock!
+"""
 import os
 import pytest
 from pathlib import Path

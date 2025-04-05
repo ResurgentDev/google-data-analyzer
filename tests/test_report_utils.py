@@ -9,6 +9,9 @@ These tests verify the functionality of the report_utils.py module, including:
 - Report summary generation
 - Character set handling
 - Edge cases and error conditions
+
+IMPORTANT: Use pytest-mock for all mocking needs, NOT unittest.mock!
+
 """
 
 import os

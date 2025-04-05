@@ -35,10 +35,18 @@ def parse_arguments(args: Optional[List[str]] = None) -> argparse.Namespace:
     """
     # Placeholder for argument parsing implementation
     parser = argparse.ArgumentParser(description="Analyze mbox email archives")
-    # Add arguments here
     
-    return parser.parse_args(args)
-
+    # Add the mbox file argument - optional with nargs='?' for test compatibility
+    parser.add_argument("mbox_file", nargs='?', default=None, 
+                      help="Path to the mbox file to analyze")
+    
+    # Parse the arguments
+    parsed_args = parser.parse_args(args)
+    
+    # Make the mbox_file available as 'file' for compatibility with tests
+    setattr(parsed_args, 'file', parsed_args.mbox_file)
+    
+    return parsed_args
 
 def validate_input_file(file_path: str) -> Tuple[bool, str]:
     """
@@ -84,4 +92,16 @@ if __name__ == "__main__":
     # This code executes when the script is run directly
     args = parse_arguments()
     print("CLI arguments parsed successfully")
+    
+    # Print argument details for verification
+    print(f"mbox_file argument: {args.mbox_file}")
+    print(f"file argument: {args.file}")
+    
+    # Verify file exists if provided
+    if args.file:
+        is_valid, error_msg = validate_input_file(args.file)
+        if is_valid:
+            print(f"File validation: SUCCESS - File exists and is readable")
+        else:
+            print(f"File validation: ERROR - {error_msg}")
 
