@@ -57,7 +57,7 @@ class TestArgumentParsing:
     
     def test_file_argument(self):
         """Test parsing with a file argument."""
-        test_file = "tests/data/sample.mbox"
+        test_file = "tests/data/sample32.mbox"
         with mock.patch('sys.argv', ['script_name', test_file]):
             args = parse_arguments()
             assert hasattr(args, 'file')
