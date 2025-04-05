@@ -1,6 +1,7 @@
 black>=23.1.0           # Code auto-formatting
 flake8>=6.1.0           # Linting for Python
 pytest>=7.3.0           # Testing framework
+pytest-mock>=3.11.0     # Mocking library for testing
 setuptools>=78.1.0      # Package management
 
 -r requirements.txt
