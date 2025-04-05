@@ -28,12 +28,16 @@ Google Takeout allows users to download data from various services, including Gm
 
 ---
 
-## Latest Changes (v0.2.0)
-The project has undergone significant improvements in version 0.2.0:
+## Latest Changes (v0.3.0)
+The project has undergone significant improvements in version 0.3.0:
+- Added test mbox generator for creating reproducible test data
+- Expanded test coverage with comprehensive test cases
+- Added support for various email formats, encodings, and attachments
+
+Previous changes (v0.2.0):
 - Complete code reorganization for better maintainability
 - Added comprehensive test suite with pytest
 - Enhanced code modularity and organization
-
 ---
 ## Current Features
 
@@ -96,7 +100,12 @@ To use the Google Data Analyzer, follow these steps:
 
    Provide an MBOX file from Google Takeout, and the tool will parse and present organized data.
    
-
+4. **Generate Test Data** (for development/testing):
+   ```bash
+   python ./tests/data/generate_test_mbox.py --count [16|32]
+   ```
+   
+   This creates sample mbox files with varied email formats for testing and development.
 ## Future Enhancements
 
 In addition to the planned solutions for existing tools’ limitations, the following features are on the roadmap:
