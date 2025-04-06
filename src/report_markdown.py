@@ -479,7 +479,7 @@ def process_report(report_data: Dict[str, Any]) -> str:
     
     # Footer
     markdown += "---\n"
-    markdown += "*This report was generated using the mbox_report_to_md.py script.*\n"
+    markdown += "*This report was generated using the report_markdown.py script.*\n"
     
     return markdown
 
